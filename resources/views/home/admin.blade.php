@@ -16,12 +16,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('home.admin') }}">Admin Home</a>
-                </li>
+                @if (Auth::user()->role == 'admin')
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('home.admin') }}">Admin Home</a>
+                    </li>
+                @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home.client') }}">Client Home</a>
                 </li>
+                @endif
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -34,7 +37,7 @@
         </div>
     </nav>
     <div class="container mt-5">
-        <h1>Admin Home Page</h1>
+        <h1>{{ Auth::user()->name}} : Admin Home Page</h1>
     </div>
 
     <!-- Ajouter les liens vers les fichiers JavaScript Bootstrap -->
