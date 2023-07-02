@@ -17,10 +17,15 @@ class RoleMiddleware
             if ($user->role == 'admin') {
                 return $next($request);
             } else {
-                dd('Vous n\'avez pas de droit administrateur');
+                return response()->view('unaututhorized');
             }
         } else {
-            return $next($request);
+            if ($user->role == 'client') {
+                return $next($request);
+            }else{
+                return response()->view('unaututhorized');
+            }
+
         }
 
 

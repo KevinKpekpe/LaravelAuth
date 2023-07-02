@@ -17,13 +17,13 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('home.client');
-            // if (auth()->user()->isAdmin()) {
-            //     return redirect()->route('home.admin');
-            // } else {
-            //     return redirect()->route('home.client');
-            // }
+            // $request->session()->regenerate();
+            // return redirect()->route('home.client');
+            if (auth()->user()->isAdmin()) {
+                return redirect()->route('home.admin');
+            } else {
+                return redirect()->route('home.client');
+            }
         } else {
             return redirect()->back()->withInput()->withErrors(['email' => 'Invalid credentials']);
         }
